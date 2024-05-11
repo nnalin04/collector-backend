@@ -15,9 +15,19 @@ public class CollectorController {
 
     private final CollectorService service;
 
-    @GetMapping
-    public String welcome() {
-        return "Welcome new Vamshi";
+    @GetMapping("/a")
+    public String a() {
+        return "hello";
+    }
+
+    @GetMapping("/b")
+    public String b() {
+        return "hello";
+    }
+
+    @GetMapping("/c")
+    public String c() {
+        return "hello";
     }
 
     @PostMapping("/upload")
