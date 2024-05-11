@@ -17,7 +17,7 @@ public class CollectorController {
 
     @GetMapping
     public String welcome() {
-        return "Welcome new customer";
+        return "Welcome new Vamshi";
     }
 
     @PostMapping("/upload")
