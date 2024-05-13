@@ -17,12 +17,12 @@ public class CollectorController {
     private final CollectorService service;
 
     @GetMapping("")
-    public String c() {
+    public String getUser() {
         return "Welcome User";
     }
 
     @PostMapping("/upload")
-    public List<FileData> uploadFile(@ModelAttribute NewFileData file) throws IOException {
+    public List<FileData> uploadFile(@ModelAttribute NewFileData file) throws IOException{
         return service.upload(file);
     }
 

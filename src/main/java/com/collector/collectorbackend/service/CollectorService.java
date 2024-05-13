@@ -4,13 +4,11 @@ import com.collector.collectorbackend.model.FileData;
 import com.collector.collectorbackend.model.NewFileData;
 import com.collector.collectorbackend.repository.CollectorRepository;
 import com.collector.collectorbackend.repository.FileRepository;
-import com.collector.collectorbackend.util.FileDocumentMultipartFile;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
