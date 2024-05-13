@@ -16,13 +16,13 @@ public class CollectorController {
 
     private final CollectorService service;
 
-    @GetMapping("/")
+    @GetMapping("")
     public String c() {
         return "Welcome User";
     }
 
     @PostMapping("/upload")
-    public List<MultipartFile> uploadFile(@RequestBody NewFileData file) throws IOException {
+    public List<MultipartFile> uploadFile(@ModelAttribute NewFileData file) throws IOException {
         return service.upload(file);
     }
 
