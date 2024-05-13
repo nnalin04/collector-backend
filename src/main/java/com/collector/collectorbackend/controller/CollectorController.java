@@ -1,10 +1,10 @@
 package com.collector.collectorbackend.controller;
 
+import com.collector.collectorbackend.model.FileData;
 import com.collector.collectorbackend.model.NewFileData;
 import com.collector.collectorbackend.service.CollectorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,12 +22,12 @@ public class CollectorController {
     }
 
     @PostMapping("/upload")
-    public List<MultipartFile> uploadFile(@ModelAttribute NewFileData file) throws IOException {
+    public List<FileData> uploadFile(@ModelAttribute NewFileData file) throws IOException {
         return service.upload(file);
     }
 
     @GetMapping("/list")
-    public List<MultipartFile> listFiles() {
+    public List<FileData> listFiles() {
         return service.listFiles();
     }
 
