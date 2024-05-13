@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("collecter")
+@RequestMapping("collector")
 @RequiredArgsConstructor
 public class CollectorController {
 
