@@ -1,6 +1,7 @@
 package com.collector.collectorbackend.service;
 
 import com.collector.collectorbackend.model.FileData;
+import com.collector.collectorbackend.model.NewFileData;
 import com.collector.collectorbackend.repository.CollectorRepository;
 import com.collector.collectorbackend.repository.FileRepository;
 import com.collector.collectorbackend.util.FileDocumentMultipartFile;
@@ -19,10 +20,10 @@ public class CollectorService {
     private final CollectorRepository collectorRepository;
     private final FileRepository fileRepository;
 
-    public List<MultipartFile> upload(MultipartFile file) throws IOException {
+    public List<MultipartFile> upload(NewFileData file) throws IOException {
         FileData fileDocument = new FileData();
-        fileDocument.setFileName(file.getOriginalFilename());
-        fileDocument.setData(file.getBytes());
+        fileDocument.setFileName(file.getFile().getOriginalFilename());
+        fileDocument.setData(file.getFile().getBytes());
         fileRepository.save(fileDocument);
         return listFiles();
     }

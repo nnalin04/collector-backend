@@ -1,5 +1,6 @@
 package com.collector.collectorbackend.controller;
 
+import com.collector.collectorbackend.model.NewFileData;
 import com.collector.collectorbackend.service.CollectorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -15,23 +16,13 @@ public class CollectorController {
 
     private final CollectorService service;
 
-    @GetMapping("/a")
-    public String a() {
-        return "hello";
-    }
-
-    @GetMapping("/b")
-    public String b() {
-        return "hello";
-    }
-
-    @GetMapping("/c")
+    @GetMapping("/")
     public String c() {
-        return "hello";
+        return "Welcome User";
     }
 
     @PostMapping("/upload")
-    public List<MultipartFile> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+    public List<MultipartFile> uploadFile(@RequestBody NewFileData file) throws IOException {
         return service.upload(file);
     }
 
