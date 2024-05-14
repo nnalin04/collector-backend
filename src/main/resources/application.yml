@@ -3,6 +3,10 @@ spring:
     mongodb:
       uri: mongodb+srv://collector-database:collector-database@collector-database.a6vvb30.mongodb.net/?retryWrites=true&w=majority&appName=Collector-database
       database: collector-database
+  servlet:
+    multipart:
+      max-request-size: 10MB
+
 
 logging:
   pattern:
