@@ -2,6 +2,7 @@ package com.collector.collectorbackend.service;
 
 import com.collector.collectorbackend.model.FileData;
 import com.collector.collectorbackend.model.NewFileData;
+import com.collector.collectorbackend.model.ResponseMessage;
 import com.collector.collectorbackend.repository.CollectorRepository;
 import com.collector.collectorbackend.repository.FileRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,5 +29,10 @@ public class CollectorService {
 
     public List<FileData> listFiles() {
         return fileRepository.findAll();
+    }
+
+    public ResponseMessage delete(String id) {
+        fileRepository.deleteById(id);
+        return ResponseMessage.builder().message("Deleted : "+ id).build();
     }
 }
