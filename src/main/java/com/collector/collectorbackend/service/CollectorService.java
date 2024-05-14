@@ -33,6 +33,6 @@ public class CollectorService {
 
     public ResponseMessage delete(String id) {
         fileRepository.deleteById(id);
-        return ResponseMessage.builder().message("Deleted : "+ id).build();
+        return ResponseMessage.builder().message("Deleted :" + id).id(id).build();
     }
 }

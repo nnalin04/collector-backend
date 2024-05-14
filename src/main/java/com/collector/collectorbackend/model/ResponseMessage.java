@@ -7,4 +7,5 @@ import lombok.Data;
 @Builder
 public class ResponseMessage {
     private String message;
+    private String id;
 }
