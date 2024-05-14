@@ -1,12 +1,13 @@
 package com.collector.collectorbackend.service;
 
+import com.collector.collectorbackend.model.CollectorItem;
 import com.collector.collectorbackend.model.FileData;
+import com.collector.collectorbackend.model.NewFileData;
 import com.collector.collectorbackend.model.ResponseMessage;
 import com.collector.collectorbackend.repository.CollectorRepository;
-import com.collector.collectorbackend.repository.FileRepository;
+import com.collector.collectorbackend.repository.CollectorItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,21 +17,24 @@ import java.util.List;
 public class CollectorService {
 
     private final CollectorRepository collectorRepository;
-    private final FileRepository fileRepository;
+    private final CollectorItemRepository collectorItemRepository;
 
-    public FileData upload(MultipartFile file) throws IOException {
-        FileData fileDocument = new FileData();
-        fileDocument.setFileName(file.getOriginalFilename());
-        fileDocument.setData(file.getBytes());
-        return fileRepository.save(fileDocument);
+    public CollectorItem upload(NewFileData file) throws IOException {
+        return collectorItemRepository.save(CollectorItem.builder().name(file.getName())
+                .description(file.getDescription())
+                .fileData(FileData.builder()
+                        .fileName(file.getFile().getName())
+                        .data(file.getFile().getBytes())
+                        .build())
+                .build());
     }
 
-    public List<FileData> listFiles() {
-        return fileRepository.findAll();
+    public List<CollectorItem> listFiles() {
+        return collectorItemRepository.findAll();
     }
 
     public ResponseMessage delete(String id) {
-        fileRepository.deleteById(id);
+        collectorItemRepository.deleteById(id);
         return ResponseMessage.builder().message("Deleted :" + id).id(id).build();
     }
 }

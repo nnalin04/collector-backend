@@ -8,4 +8,6 @@ import org.springframework.web.multipart.MultipartFile;
 @Builder
 public class NewFileData {
     private MultipartFile file;
+    private String name;
+    private String description;
 }

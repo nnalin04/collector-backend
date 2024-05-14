@@ -1,15 +1,12 @@
 package com.collector.collectorbackend.model;
 
+import lombok.Builder;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@Builder
 @Data
-@Document
 public class FileData {
-    @Id
-    private String id;
     private String fileName;
     private byte[] data;
-
 }

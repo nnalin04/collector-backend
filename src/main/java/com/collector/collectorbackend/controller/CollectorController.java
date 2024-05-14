@@ -1,6 +1,7 @@
 package com.collector.collectorbackend.controller;
 
-import com.collector.collectorbackend.model.FileData;
+import com.collector.collectorbackend.model.CollectorItem;
+import com.collector.collectorbackend.model.NewFileData;
 import com.collector.collectorbackend.model.ResponseMessage;
 import com.collector.collectorbackend.service.CollectorService;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.http.ResponseEntity;
 
 @CrossOrigin("*")
@@ -26,8 +26,8 @@ public class CollectorController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<FileData> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
-        return ResponseEntity.ok(service.upload(file));
+    public ResponseEntity<CollectorItem> uploadFile(@RequestBody NewFileData newFileData) throws IOException {
+        return ResponseEntity.ok(service.upload(newFileData));
     }
 
     @DeleteMapping("/delete")
@@ -36,7 +36,7 @@ public class CollectorController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<FileData>> listFiles() {
+    public ResponseEntity<List<CollectorItem>> listFiles() {
         return ResponseEntity.ok(service.listFiles());
     }
 }
