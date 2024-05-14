@@ -26,7 +26,7 @@ public class CollectorController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<List<FileData>> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+    public ResponseEntity<FileData> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
         return ResponseEntity.ok(service.upload(file));
     }
 
