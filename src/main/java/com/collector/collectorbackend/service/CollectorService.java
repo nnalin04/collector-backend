@@ -6,6 +6,7 @@ import com.collector.collectorbackend.repository.CollectorRepository;
 import com.collector.collectorbackend.repository.FileRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,10 +18,10 @@ public class CollectorService {
     private final CollectorRepository collectorRepository;
     private final FileRepository fileRepository;
 
-    public List<FileData> upload(NewFileData file) throws IOException {
+    public List<FileData> upload(MultipartFile file) throws IOException {
         FileData fileDocument = new FileData();
-        fileDocument.setFileName(file.getFile().getOriginalFilename());
-        fileDocument.setData(file.getFile().getBytes());
+        fileDocument.setFileName(file.getOriginalFilename());
+        fileDocument.setData(file.getBytes());
         fileRepository.save(fileDocument);
         return listFiles();
     }
