@@ -14,5 +14,5 @@ public class Collector {
     private String name;
     private String email;
     private String password;
-    private FileData fileData;
+    private CollectorItem collectorItem;
 }

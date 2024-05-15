@@ -1,4 +1,4 @@
-package com.collector.collectorbackend.model;
+package com.collector.collectorbackend.dao;
 
 import lombok.Builder;
 import lombok.Data;

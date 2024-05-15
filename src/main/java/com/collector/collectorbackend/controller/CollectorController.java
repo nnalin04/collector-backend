@@ -1,16 +1,16 @@
 package com.collector.collectorbackend.controller;
 
+import com.collector.collectorbackend.dao.CollectorItemDAO;
+import com.collector.collectorbackend.dao.ResponseMessage;
 import com.collector.collectorbackend.model.CollectorItem;
-import com.collector.collectorbackend.model.NewFileData;
-import com.collector.collectorbackend.model.ResponseMessage;
 import com.collector.collectorbackend.service.CollectorService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
-
-import org.springframework.http.ResponseEntity;
 
 @CrossOrigin("*")
 @RestController
@@ -26,17 +26,18 @@ public class CollectorController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<CollectorItem> uploadFile(@RequestBody NewFileData newFileData) throws IOException {
-        return ResponseEntity.ok(service.upload(newFileData));
+    public ResponseEntity<CollectorItem> uploadFile(@RequestParam("file") MultipartFile file, @RequestBody CollectorItemDAO collectorItemDAO) throws IOException {
+        collectorItemDAO.setFile(file);
+        return ResponseEntity.ok(service.uploadNewItem(collectorItemDAO));
     }
 
     @DeleteMapping("/delete")
     public ResponseEntity<ResponseMessage> delete(@RequestParam("id") String id) {
-        return ResponseEntity.ok(service.delete(id));
+        return ResponseEntity.ok(service.deleteItemById(id));
     }
 
     @GetMapping("/list")
     public ResponseEntity<List<CollectorItem>> listFiles() {
-        return ResponseEntity.ok(service.listFiles());
+        return ResponseEntity.ok(service.listAllItem());
     }
 }
