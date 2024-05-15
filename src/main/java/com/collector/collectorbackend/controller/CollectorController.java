@@ -25,8 +25,18 @@ public class CollectorController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<CollectorItem> uploadFile(@ModelAttribute CollectorItemDTO itemDto) throws IOException {
-        return ResponseEntity.ok(service.uploadNewItem(itemDto));
+    public ResponseEntity<CollectorItem> uploadFile(@ModelAttribute CollectorItemDTO item) throws IOException {
+        return ResponseEntity.ok(service.uploadNewItem(item));
+    }
+
+    @PostMapping("/upload_list")
+    public ResponseEntity<List<CollectorItem>> uploadFiles(@ModelAttribute List<CollectorItemDTO> items) throws IOException {
+        return ResponseEntity.ok(service.uploadNewItems(items));
+    }
+
+    @PutMapping("/update_file")
+    public ResponseEntity<CollectorItem> updateFile(@ModelAttribute CollectorItemDTO item) {
+        return ResponseEntity.ok(service.updateItem(item));
     }
 
     @DeleteMapping("/delete")
