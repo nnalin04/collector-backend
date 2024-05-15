@@ -2,7 +2,7 @@ package com.collector.collectorbackend.service;
 
 import com.collector.collectorbackend.model.CollectorItem;
 import com.collector.collectorbackend.model.FileData;
-import com.collector.collectorbackend.dao.CollectorItemDAO;
+import com.collector.collectorbackend.dao.CollectorItemDTO;
 import com.collector.collectorbackend.dao.ResponseMessage;
 import com.collector.collectorbackend.repository.CollectorRepository;
 import com.collector.collectorbackend.repository.CollectorItemRepository;
@@ -20,7 +20,7 @@ public class CollectorService {
     private final CollectorRepository collectorRepository;
     private final CollectorItemRepository collectorItemRepository;
 
-    public CollectorItem uploadNewItem(CollectorItemDAO file) throws IOException {
+    public CollectorItem uploadNewItem(CollectorItemDTO file) throws IOException {
         return collectorItemRepository.save(CollectorItem.builder().name(file.getName())
                 .description(file.getDescription())
                 .fileData(FileData.builder()
@@ -30,16 +30,16 @@ public class CollectorService {
                 .build());
     }
 
-    public CollectorItem updateItemById(CollectorItemDAO collectorItemDAO) {
-        Optional<CollectorItem> collectorItemOptional = collectorItemRepository.findById(collectorItemDAO.getId());
+    public CollectorItem updateItemById(CollectorItemDTO collectorItemDTO) {
+        Optional<CollectorItem> collectorItemOptional = collectorItemRepository.findById(collectorItemDTO.getId());
         CollectorItem collectorItem = null;
         if (collectorItemOptional.isPresent()) {
             collectorItem = collectorItemOptional.get();
-            if (!collectorItemDAO.getName().isBlank()) {
-                collectorItem.setName(collectorItemDAO.getName());
+            if (!collectorItemDTO.getName().isBlank()) {
+                collectorItem.setName(collectorItemDTO.getName());
             }
-            if (!collectorItemDAO.getDescription().isBlank()) {
-                collectorItem.setDescription(collectorItemDAO.getDescription());
+            if (!collectorItemDTO.getDescription().isBlank()) {
+                collectorItem.setDescription(collectorItemDTO.getDescription());
             }
         }
         assert collectorItem != null;

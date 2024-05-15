@@ -1,13 +1,12 @@
 package com.collector.collectorbackend.controller;
 
-import com.collector.collectorbackend.dao.CollectorItemDAO;
+import com.collector.collectorbackend.dao.CollectorItemDTO;
 import com.collector.collectorbackend.dao.ResponseMessage;
 import com.collector.collectorbackend.model.CollectorItem;
 import com.collector.collectorbackend.service.CollectorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,9 +25,8 @@ public class CollectorController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<CollectorItem> uploadFile(@RequestParam("file") MultipartFile file, @RequestBody CollectorItemDAO collectorItemDAO) throws IOException {
-        collectorItemDAO.setFile(file);
-        return ResponseEntity.ok(service.uploadNewItem(collectorItemDAO));
+    public ResponseEntity<CollectorItem> uploadFile(@ModelAttribute CollectorItemDTO itemDto) throws IOException {
+        return ResponseEntity.ok(service.uploadNewItem(itemDto));
     }
 
     @DeleteMapping("/delete")
