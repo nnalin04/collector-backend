@@ -50,7 +50,7 @@ public class CollectorService {
         return ResponseMessage.builder().message("Deleted :" + id).id(id).build();
     }
 
-    public List<CollectorItem> uploadNewItems(List<CollectorItemDTO> items) throws IOException {
+    public List<CollectorItem> uploadNewItems(List<CollectorItemDTO> items) {
         List<CollectorItem> collectorItems = new ArrayList<>();
         for (CollectorItemDTO itemDTO : items) {
             collectorItems.add(getCollector(itemDTO));
@@ -58,12 +58,12 @@ public class CollectorService {
         return collectorItemRepository.saveAll(collectorItems);
     }
 
-    public CollectorItem getCollector(CollectorItemDTO file) throws IOException {
+    public CollectorItem getCollector(CollectorItemDTO file) {
         return CollectorItem.builder().name(file.getName())
                 .description(file.getDescription())
                 .fileData(FileData.builder()
-                        .fileName(file.getFile().getName())
-                        .data(file.getFile().getBytes())
+                        .fileName(file.getName())
+                        .data(file.getFile())
                         .build())
                 .build();
     }

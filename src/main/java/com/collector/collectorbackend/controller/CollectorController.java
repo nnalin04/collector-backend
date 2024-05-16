@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.List;
 
 @CrossOrigin("*")
@@ -24,13 +23,8 @@ public class CollectorController {
         return "Welcome User";
     }
 
-    @PostMapping("/upload")
-    public ResponseEntity<CollectorItem> uploadFile(@ModelAttribute CollectorItemDTO item) throws IOException {
-        return ResponseEntity.ok(service.uploadNewItem(item));
-    }
-
     @PostMapping("/upload_list")
-    public ResponseEntity<List<CollectorItem>> uploadFiles(@ModelAttribute List<CollectorItemDTO> items) throws IOException {
+    public ResponseEntity<List<CollectorItem>> uploadFiles(@RequestBody List<CollectorItemDTO> items) {
         return ResponseEntity.ok(service.uploadNewItems(items));
     }
 
